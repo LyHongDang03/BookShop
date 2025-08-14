@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Activation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .instruction {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .activation-code {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .activation-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .activation-link a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .activation-link a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Activate Your Account</h1>
+    <p class="greeting" th:text="'Hello ' + ${username} + ','">Hello User,</p>
+    <p class="instruction">Thank you for registering! Use the code below to activate your account:</p>
+    <div class="activation-code" th:text="${activationCode}">123456</div>
+    <div class="activation-link">
+        <a th:href="${confirmationUrl}" target="_blank">Click here to activate</a>
+    </div>
+</div>
+</body>
+</html>

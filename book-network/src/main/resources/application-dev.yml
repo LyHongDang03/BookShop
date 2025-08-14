@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/book_network
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lyhongdang03@gmail.com
+    password: jpkpkgkypqegofwv
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+application:
+  security:
+    jwt:
+      secret-key: O4RW4tzwv014C+CzE0YW/DjFjtH0lSL8L/Ki63S5t01Wl/iYIDP6mdmXv+TG7FzudtDPjaOZ16gFKUODkiR/CWEv3n2OKFxQMkU+KkZMNmg=
+      expiration: 300000000000000
+      expirationRefreshToken: 6048000000000000
+  mailing:
+    frontend:
+      activation-url: http://localhost:8080/api/v1/auth/activate-account?token=
+  cloudinary:
+    cloud-name: dfibxfwot
+    api-key: 636131119697544
+    api-secret: KEY3IjqICF-imgqVmzc22oGOaxc
+server:
+  port: 8080
