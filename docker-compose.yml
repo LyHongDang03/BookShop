@@ -1,0 +1,73 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: book_network
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - book-shop
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: chat
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - book-shop
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - book-shop
+
+#  springboot-app:
+#    build: .
+#    container_name: springboot-container
+#    ports:
+#      - "8080:8080"
+#    restart: always
+#    healthcheck:
+#      test: [ "CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 3
+#      start_period: 5s
+#    depends_on:
+#      - mysql
+#      - mongodb
+#      - redis
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/book_network
+#      SPRING_DATASOURCE_USERNAME: user
+#      SPRING_DATASOURCE_PASSWORD: password
+#      SPRING_DATA_MONGODB_URI: mongodb://root:root@localhost:27017/chat?authSource=admin
+#    networks:
+#      - book-shop
+
+volumes:
+  mysql-data:
+  mongodb_data:
+  redis-data:
+
+networks:
+  book-shop:

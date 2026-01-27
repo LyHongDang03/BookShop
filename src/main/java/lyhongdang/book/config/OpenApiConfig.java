@@ -1,0 +1,35 @@
+package lyhongdang.book.config;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.security.SecuritySchemes;
+import io.swagger.v3.oas.annotations.servers.Server;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@OpenAPIDefinition(
+        info = @Info(
+                title = "REST API",
+                version = "1.0",
+                description = "REST API description...",
+                contact = @Contact(name = "lyhongdang03@gmail.com")
+        ),
+        servers = {
+                @Server(url = "http://localhost:8080/api/v1")
+        },
+        security = {
+                @SecurityRequirement(name = "bearerToken")
+        }
+)
+@SecurityScheme(
+        name = "bearerToken",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
+public class OpenApiConfig {
+}

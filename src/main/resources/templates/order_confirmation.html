@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .instruction {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .order-summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .order-summary th, .order-summary td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        .order-summary th {
+            background-color: #f2f2f2;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Your Order is Confirmed!</h1>
+    <p class="greeting" th:text="'Hello ' + ${username} + ','">Hello User,</p>
+    <p class="instruction">Thank you for your purchase. Here is a summary of your order:</p>
+
+    <p><strong>Order ID:</strong> <span th:text="${order.id}">[Order ID]</span></p>
+    <p><strong>Order Date:</strong> <span th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}">[Order Date]</span></p>
+
+    <table class="order-summary">
+        <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="detail : ${order.orderDetails}">
+            <td th:text="${detail.book.nameBook}">Book Name</td>
+            <td th:text="${detail.quantity}">1</td>
+            <td th:text="${#numbers.formatDecimal(detail.totalPrice, 1, 'COMMA', 0, 'POINT')} + ' VND'">19.99 VND</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="total-row">
+            <td colspan="2">Total</td>
+            <td th:text="${#numbers.formatDecimal(totalPrice, 1, 'COMMA', 0, 'POINT')} + ' VND'">19.99 VND</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <p class="footer">Thank you for shopping with Book Shop!</p>
+</div>
+</body>
+</html>
